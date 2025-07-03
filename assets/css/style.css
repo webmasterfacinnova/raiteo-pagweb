@@ -1,0 +1,98 @@
+/* Estilos principales para Raiteo */
+:root {
+  --primary-color: #2c7a7b; /* verde azulado */
+  --secondary-color: #2b6cb0; /* azul */
+  --neutral-color: #f7fafc; /* gris claro */
+  --dark-color: #1a202c; /* gris oscuro */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--neutral-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin-right: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background-image: url('https://via.placeholder.com/1200x400');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero h1 {
+  margin-top: 0;
+  font-size: 2.5rem;
+}
+
+.section {
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.feature {
+  flex: 1 1 300px;
+  padding: 1rem;
+}
+
+.route-placeholder {
+  height: 300px;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+  }
+  nav li {
+    margin: 0.5rem 0;
+  }
+}
