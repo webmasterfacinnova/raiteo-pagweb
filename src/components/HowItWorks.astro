@@ -346,7 +346,9 @@
 </style>
 
 <script>
-  // Tab switching
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // Cambiar de pestañas de manera segura
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.tab-panel');
 
@@ -366,6 +368,12 @@
           panel.classList.add('active');
         }
       });
+
+      // CRUCIAL: Al cambiar de pestaña, el DOM cambia de tamaño.
+      // Le avisamos a GSAP inmediatamente que recalcule las posiciones de scroll.
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
     });
   });
 </script>
