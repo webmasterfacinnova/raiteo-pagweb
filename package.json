@@ -1,5 +1,5 @@
 {
-  "name": "new-page",
+  "name": "raiteo",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,6 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "astro": "^6.4.4"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.8",
+    "typescript": "^5.6.0"
   }
 }

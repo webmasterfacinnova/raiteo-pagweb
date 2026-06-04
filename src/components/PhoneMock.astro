@@ -1,0 +1,239 @@
+---
+export interface Props {
+  variant?: 'passenger-routes' | 'passenger-assigned' | 'driver-view';
+  label?: string;
+}
+
+// 1. Define the type for a single variant configuration
+interface MapVariantConfig {
+  title: string;
+  routes: Array<{
+    points: string;
+    color: string;
+    width: number;
+    opacity: number;
+  }>;
+  marker?: { cx: number; cy: number; color: string };
+  drivers?: Array<{ cx: number; cy: number; color: string; label: string }>;
+  passengers?: Array<{ cx: number; cy: number; color: string; label: string }>;
+  car?: { cx: number; cy: number };
+}
+
+const { variant = 'passenger-routes', label = '' } = Astro.props;
+
+// 2. Explicitly type your mock data object
+const mockContent: Record<'passenger-routes' | 'passenger-assigned' | 'driver-view', MapVariantConfig> = {
+  'passenger-routes': {
+    title: 'Explora rutas',
+    routes: [
+      { points: '30,50 70,110 120,160 160,210 150,270 120,310', color: '#6e737d', width: 2.5, opacity: 0.8 },
+      { points: '50,40 100,100 150,140 190,180', color: '#8e9399', width: 2, opacity: 0.5 },
+      { points: '80,30 130,90 180,150 210,200 200,260', color: '#b8bcc2', width: 1.8, opacity: 0.4 },
+    ],
+    marker: { cx: 140, cy: 180, color: '#e74c3c' },
+  },
+  'passenger-assigned': {
+    title: 'Ruta seleccionada',
+    routes: [
+      { points: '40,50 80,130 140,200 180,270 170,330', color: '#6e737d', width: 3.5, opacity: 0.9 },
+    ],
+    drivers: [
+      { cx: 90, cy: 145, color: '#e74c3c', label: 'D1' },
+      { cx: 155, cy: 240, color: '#e67e22', label: 'D2' },
+    ],
+  },
+  'driver-view': {
+    title: 'Pasajeros en ruta',
+    routes: [
+      { points: '30,40 80,120 140,190 190,270 175,340', color: '#6e737d', width: 3, opacity: 0.9 },
+    ],
+    passengers: [
+      { cx: 65, cy: 95, color: '#5d8a7c', label: 'Inicio' },
+      { cx: 120, cy: 160, color: '#4a7db5', label: 'Final' },
+      { cx: 170, cy: 250, color: '#5d8a7c', label: 'Inicio' },
+    ],
+    car: { cx: 100, cy: 135 },
+  },
+};
+
+const content = mockContent[variant];
+---
+
+<div class="phone-mock-wrapper">
+  <div class="phone-mock">
+    <div class="phone-mock-frame">
+      <div class="phone-mock-notch"></div>
+      <div class="phone-mock-screen">
+        <div class="mock-status-bar">
+          <span>9:41</span>
+          <span>●●●●○</span>
+        </div>
+        <div class="mock-map-bg">
+          <svg viewBox="0 0 220 400" xmlns="http://www.w3.org/2000/svg" class="mock-svg">
+            <!-- Grid sutil -->
+            <defs>
+              <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(110,115,125,0.06)" stroke-width="0.8"/>
+              </pattern>
+            </defs>
+            <rect width="220" height="400" fill="url(#grid)"/>
+
+            <!-- Rutas -->
+            {content.routes?.map((route) => (
+              <polyline points={route.points} fill="none" stroke={route.color} stroke-width={route.width} stroke-linecap="round" stroke-linejoin="round" opacity={route.opacity} />
+            ))}
+
+            <!-- Marker para pasajero -->
+            {content.marker && (
+              <circle cx={content.marker.cx} cy={content.marker.cy} r="8" fill={content.marker.color} stroke="#fff" stroke-width="2.5">
+                <animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            )}
+
+            <!-- Conductores -->
+            {content.drivers?.map((d, i) => (
+              <g>
+                <circle cx={d.cx} cy={d.cy} r="9" fill={d.color} stroke="#fff" stroke-width="2"/>
+                <text x={d.cx} y={d.cy + 1} text-anchor="middle" fill="#fff" font-size="8" font-weight="bold" dominant-baseline="middle">{d.label}</text>
+              </g>
+            ))}
+
+            <!-- Pasajeros (vista conductor) -->
+            {content.passengers?.map((p, i) => (
+              <g>
+                <circle cx={p.cx} cy={p.cy} r="7" fill={p.color} stroke="#fff" stroke-width="2">
+                  <animate attributeName="opacity" values="1;0.5;1" dur={`${1.5 + i * 0.3}s`} repeatCount="indefinite"/>
+                </circle>
+              </g>
+            ))}
+
+            <!-- Vehículo conductor -->
+            {content.car && (
+              <g>
+                <rect x={content.car.cx - 8} y={content.car.cy - 5} width="16" height="10" rx="4" fill="#e74c3c" stroke="#fff" stroke-width="2"/>
+                <circle cx={content.car.cx - 4} cy={content.car.cy + 5} r="2.5" fill="#fff"/>
+                <circle cx={content.car.cx + 4} cy={content.car.cy + 5} r="2.5" fill="#fff"/>
+              </g>
+            )}
+          </svg>
+        </div>
+        <div class="mock-bottom-bar">
+          <span class="mock-btn"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  {label && <p class="mock-label-bottom">{label}</p>}
+</div>
+
+<style>
+  .phone-mock-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .phone-mock {
+    display: flex;
+    justify-content: center;
+  }
+
+  .phone-mock-frame {
+    width: 200px;
+    height: 410px;
+    background: #1a1d21;
+    border-radius: 26px;
+    padding: 8px;
+    box-shadow: var(--shadow-xl), 0 0 0 3px #2d3136, 0 0 0 5px #1a1d21;
+    position: relative;
+  }
+
+  .phone-mock-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 18px;
+    background: #1a1d21;
+    border-radius: 0 0 12px 12px;
+    z-index: 2;
+  }
+
+  .phone-mock-screen {
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mock-status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px 4px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #1a1d21;
+    background: #f8f9fa;
+    z-index: 1;
+  }
+
+  .mock-map-bg {
+    flex: 1;
+    background: linear-gradient(160deg, #e8ecf1, #dce1e7, #eef1f5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mock-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .mock-bottom-bar {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #f8f9fa;
+  }
+
+  .mock-btn {
+    width: 50px;
+    height: 5px;
+    background: #d1d5db;
+    border-radius: 3px;
+  }
+
+  .mock-label-bottom {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .phone-mock-frame {
+      width: 160px;
+      height: 330px;
+      border-radius: 22px;
+      padding: 6px;
+    }
+
+    .phone-mock-screen {
+      border-radius: 17px;
+    }
+
+    .phone-mock-notch {
+      width: 55px;
+      height: 14px;
+      top: 6px;
+      border-radius: 0 0 10px 10px;
+    }
+  }
+</style>
