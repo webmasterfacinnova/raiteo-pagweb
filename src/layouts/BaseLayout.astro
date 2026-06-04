@@ -26,16 +26,189 @@ const { title, description } = Astro.props;
     </main>
     <Footer />
 
-    <!-- AOS Animation Library -->
+    <!-- GSAP + ScrollTrigger -->
     <script>
-      import AOS from 'aos';
-      import 'aos/dist/aos.css';
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 80,
-        easing: 'ease-out-cubic',
+      gsap.registerPlugin(ScrollTrigger);
+
+      function initAnimations() {
+        // ========== HERO ==========
+        const heroTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top bottom', // Se activa en cuanto aparece
+            toggleActions: 'play none none none',
+          },
+        });
+        heroTimeline
+          .from('.hero-text .section-label', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' })
+          .from('.hero-text h1', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+          .from('.hero-description', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+          .from('.hero-buttons', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+          .from('.hero-stats', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+          .from('.hero-mock', { x: 100, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6');
+
+        // Parallax del teléfono
+        gsap.to('.floating-phone', {
+          y: -30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+
+        // ========== HOW IT WORKS ==========
+        const hiwTitle = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#how-it-works',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+        });
+        hiwTitle
+          .from('#how-it-works .section-label', { y: 30, opacity: 0, duration: 0.6 })
+          .from('#how-it-works .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.3')
+          .from('#how-it-works .section-subtitle', { y: 30, opacity: 0, duration: 0.6 }, '-=0.3');
+
+        // Animar el panel activo actual
+        function animateActivePanel() {
+          const activePanel = document.querySelector('.tab-panel.active');
+          if (!activePanel) return;
+          const steps = activePanel.querySelectorAll('.step');
+          const mock = activePanel.querySelector('.panel-mock');
+          
+          // Creamos triggers frescos para el panel activo
+          if (steps.length) {
+            gsap.from(steps, {
+              scrollTrigger: {
+                trigger: activePanel,
+                start: 'top bottom',
+                toggleActions: 'play none none none',
+              },
+              x: -60,
+              opacity: 0,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: 'power2.out',
+            });
+          }
+          if (mock) {
+            gsap.from(mock, {
+              scrollTrigger: {
+                trigger: activePanel,
+                start: 'top bottom',
+                toggleActions: 'play none none none',
+              },
+              x: 80,
+              opacity: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+            });
+          }
+          // Refrescar ScrollTrigger para el nuevo contenido
+          ScrollTrigger.refresh();
+        }
+
+        // Animar el panel que esté activo al cargar
+        animateActivePanel();
+
+        // Cambiar de pestaña: reanimar
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            // Pequeña espera para que el DOM actualice las clases 'active'
+            setTimeout(animateActivePanel, 60);
+          });
+        });
+
+        // ========== FEATURES ==========
+        gsap.from('.feature-card', {
+          scrollTrigger: {
+            trigger: '#features',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+          y: 60,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power3.out',
+        });
+
+        // ========== APP MOCKS ==========
+        gsap.from('.mock-item', {
+          scrollTrigger: {
+            trigger: '#mocks',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'back.out(1.4)',
+        });
+
+        // ========== CONTACT ==========
+        gsap.from('.contact-form-wrapper', {
+          scrollTrigger: {
+            trigger: '#contact',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+          x: -80,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        });
+        gsap.from('.contact-info', {
+          scrollTrigger: {
+            trigger: '#contact',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+          x: 80,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        });
+
+        // ========== FOOTER ==========
+        gsap.from('footer', {
+          scrollTrigger: {
+            trigger: 'footer',
+            start: 'top bottom',
+            toggleActions: 'play none none none',
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
+
+        // Refrescar todos los ScrollTrigger después de montarlos
+        ScrollTrigger.refresh();
+      }
+
+      // Esperar a que el DOM esté listo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnimations);
+      } else {
+        initAnimations();
+      }
+
+      // Refrescar al redimensionar (debounce)
+      let resizeTimer: number;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 200);
       });
     </script>
   </body>
