@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Raiteo by Facinnovations | Specialized Route Transport",
+  description = "Raiteo is the specialized transport app that connects passengers and drivers through smart route selection, map-based waiting points, and directional destination logic.",
+  canonical = "https://raiteo.facinnovations.com/",
+  ogImage = "/og-raiteo.jpg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Baseline SEO metadata for social previews and search indexing -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#6e737d" />
+    <meta name="robots" content="index,follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:url" content={canonical} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="antialiased">
+    <!-- Accessibility: allows keyboard users to jump directly to main content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
+    >
+      Saltar al contenido
+    </a>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+  <!-- Global legal links required for app-store compliance visibility -->
+    <footer class="mx-auto mt-20 w-full max-w-7xl px-6 pb-10 text-sm text-slate-600 md:px-10">
+      <div class="glass-panel rounded-2xl px-6 py-6 md:flex md:items-center md:justify-between">
+        <p class="font-medium text-slate-800">Raiteo by Facinnovations</p>
+        <nav aria-label="Enlaces legales" class="mt-4 flex flex-wrap gap-4 md:mt-0">
+          <a href="/#terms-of-use" class="hover:text-primary">Términos de Uso</a>
+          <a href="/#privacy-policy" class="hover:text-primary">Política de Privacidad</a>
+          <a href="/#contact" class="hover:text-primary">Contacto</a>
+          <a href="/#data-deletion" class="hover:text-primary">Eliminación de Datos</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

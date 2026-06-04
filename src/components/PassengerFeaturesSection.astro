@@ -1,0 +1,63 @@
+<section id="passengers" class="mx-auto mt-22 w-full max-w-7xl px-6 md:px-10">
+  <div class="reveal mb-8 md:mb-12" data-reveal>
+    <p class="text-sm font-semibold tracking-widest text-primary uppercase">Flujo de Pasajeros</p>
+    <h2 class="font-display mt-2 text-3xl font-extrabold text-slate-900 md:text-5xl">
+      Selección de ruta sobre mapa y decisión inteligente de dirección.
+    </h2>
+  </div>
+
+  <div class="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+    <div class="reveal glass-panel rounded-3xl p-7 md:p-8" data-reveal>
+      <ol class="space-y-4 text-slate-700">
+        <li class="rounded-2xl border border-white/70 bg-white/70 p-4">
+          <span class="text-sm font-semibold text-primary">1. Exploración inicial</span>
+          <p class="mt-1">Al abrir Raiteo, el pasajero visualiza múltiples polilíneas de rutas disponibles en el mapa interactivo.</p>
+        </li>
+        <li class="rounded-2xl border border-white/70 bg-white/70 p-4">
+          <span class="text-sm font-semibold text-primary">2. Selección de ruta</span>
+          <p class="mt-1">Con zoom y toque directo, el pasajero selecciona la ruta de su interés y confirma su solicitud de recogida.</p>
+        </li>
+        <li class="rounded-2xl border border-white/70 bg-white/70 p-4">
+          <span class="text-sm font-semibold text-primary">3. Dirección de destino</span>
+          <p class="mt-1">Elige si desea viajar hacia Dirección Inicial o Dirección Final mediante un toggle claro e inmediato.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="animate-routes reveal rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7" data-reveal data-animate-routes>
+      <div class="mb-4 flex items-center justify-between">
+        <h3 class="font-display text-xl font-bold text-slate-900">Mapa de Rutas</h3>
+        <div class="inline-flex rounded-full bg-primary-50 p-1 text-xs font-semibold text-primary">
+          <span class="rounded-full bg-white px-3 py-1">Inicial</span>
+          <span class="px-3 py-1">Final</span>
+        </div>
+      </div>
+
+      <div class="route-svg overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-4">
+        <svg viewBox="0 0 460 260" class="h-full w-full" role="img" aria-label="Simulación de rutas de pasajeros">
+          <defs>
+            <linearGradient id="routeGradientPassenger" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6e737d"></stop>
+              <stop offset="100%" stop-color="#9ca3af"></stop>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="460" height="260" fill="#f8fafc"></rect>
+
+          <path class="route-path" d="M22 204 C95 42, 186 224, 280 96 S410 108, 442 48" fill="none" stroke="url(#routeGradientPassenger)" stroke-width="8" stroke-linecap="round"></path>
+          <path class="route-path" d="M24 62 C114 204, 238 26, 434 184" fill="none" stroke="#c4b08f" stroke-width="6" stroke-linecap="round"></path>
+
+          <circle cx="116" cy="114" r="8" fill="#10b981"></circle>
+          <circle cx="206" cy="152" r="8" fill="#f59e0b"></circle>
+          <circle cx="328" cy="90" r="8" fill="#10b981"></circle>
+
+          <text x="24" y="28" fill="#334155" font-size="13" font-family="Manrope">Polilíneas de rutas disponibles</text>
+        </svg>
+      </div>
+
+      <div class="mt-4 grid gap-2 sm:grid-cols-2">
+        <div class="rounded-xl bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">Dirección Inicial: color verde</div>
+        <div class="rounded-xl bg-amber-50 px-3 py-2 text-sm font-medium text-amber-700">Dirección Final: color ámbar</div>
+      </div>
+    </div>
+  </div>
+</section>

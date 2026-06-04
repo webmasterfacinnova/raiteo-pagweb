@@ -1,0 +1,58 @@
+---
+import PhoneMockup from "./PhoneMockup.astro";
+---
+
+<section class="mx-auto grid w-full max-w-7xl gap-12 px-6 pt-14 md:px-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:pt-20">
+  <div class="space-y-7">
+    <p class="reveal inline-flex items-center rounded-full border border-primary/20 bg-primary-50 px-4 py-1.5 text-sm font-semibold text-primary" data-reveal>
+      Transporte Especializado Inteligente
+    </p>
+
+    <h1 class="reveal font-display text-4xl leading-tight font-extrabold text-slate-900 md:text-6xl" data-reveal>
+      Raiteo by Facinnovations:
+      <span class="text-primary">rutas vivas</span> para pasajeros y conductores.
+    </h1>
+
+    <p class="reveal max-w-2xl text-lg text-slate-600" data-reveal>
+      Una sola plataforma móvil para seleccionar rutas en mapa, coordinar recogidas en tiempo real y optimizar cada trayecto según Dirección Inicial o Dirección Final.
+    </p>
+
+    <div class="reveal flex flex-wrap gap-3" data-reveal>
+      <a
+        href="#download"
+        class="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        Descargar para Android
+      </a>
+      <a
+        href="#download"
+        class="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
+      >
+        Descargar para iOS
+      </a>
+    </div>
+
+    <div id="download" class="reveal flex items-center gap-3 text-sm text-slate-500" data-reveal>
+      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+      Próximamente en Google Play y App Store
+    </div>
+  </div>
+
+  <div class="relative mx-auto flex w-full max-w-2xl flex-wrap items-start justify-center gap-6">
+    <div class="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-r from-primary/10 via-amber-100/60 to-emerald-100/60 blur-2xl"></div>
+
+    <PhoneMockup
+      role="Passenger"
+      title="Passenger Experience"
+      caption="Explora polilíneas, selecciona ruta y elige dirección de destino."
+      accent="emerald"
+    />
+
+    <PhoneMockup
+      role="Driver"
+      title="Driver Console"
+      caption="Visualiza pasajeros pendientes con código de color por dirección."
+      accent="amber"
+    />
+  </div>
+</section>

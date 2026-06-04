@@ -1,0 +1,52 @@
+<section id="drivers" class="mx-auto mt-22 w-full max-w-7xl px-6 md:px-10">
+  <div class="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+    <div class="animate-routes reveal rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7" data-reveal data-animate-routes>
+      <div class="mb-4">
+        <p class="text-sm font-semibold tracking-widest text-primary uppercase">Vista de Conductores</p>
+        <h2 class="font-display mt-2 text-3xl font-extrabold text-slate-900 md:text-4xl">Ruta asignada + mapa de pasajeros en espera</h2>
+      </div>
+
+      <div class="route-svg overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-4">
+        <svg viewBox="0 0 460 260" class="h-full w-full" role="img" aria-label="Simulación de mapa para conductores">
+          <path class="route-path" d="M18 198 C96 78, 186 192, 256 84 S392 66, 444 116" fill="none" stroke="#6e737d" stroke-width="9" stroke-linecap="round"></path>
+
+          <g>
+            <circle cx="112" cy="126" r="11" fill="#10b981"></circle>
+            <circle cx="112" cy="126" r="5" fill="#ecfdf5"></circle>
+            <circle cx="236" cy="98" r="11" fill="#f59e0b"></circle>
+            <circle cx="236" cy="98" r="5" fill="#fffbeb"></circle>
+            <circle cx="324" cy="140" r="11" fill="#10b981"></circle>
+            <circle cx="324" cy="140" r="5" fill="#ecfdf5"></circle>
+            <circle cx="392" cy="102" r="11" fill="#f59e0b"></circle>
+            <circle cx="392" cy="102" r="5" fill="#fffbeb"></circle>
+          </g>
+
+          <rect x="24" y="20" width="148" height="36" rx="10" fill="#e2e8f0"></rect>
+          <text x="34" y="43" fill="#334155" font-size="13" font-family="Manrope">Ruta asignada: R-17 Norte</text>
+        </svg>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2 text-sm font-medium">
+        <span class="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700">Pasajero hacia Dirección Inicial</span>
+        <span class="rounded-full bg-amber-50 px-3 py-1 text-amber-700">Pasajero hacia Dirección Final</span>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <article class="reveal glass-panel rounded-2xl p-5" data-reveal>
+        <h3 class="font-display text-xl font-bold text-slate-900">Operación guiada por contexto</h3>
+        <p class="mt-1.5 text-slate-700">Cada conductor ingresa con una ruta pre-asignada, evitando ambigüedad y optimizando tiempos de salida.</p>
+      </article>
+
+      <article class="reveal glass-panel rounded-2xl p-5" data-reveal>
+        <h3 class="font-display text-xl font-bold text-slate-900">Mapa de demanda activa</h3>
+        <p class="mt-1.5 text-slate-700">El mapa resalta en tiempo real a los pasajeros pendientes de recogida sobre la misma ruta, permitiendo priorizar paradas.</p>
+      </article>
+
+      <article class="reveal glass-panel rounded-2xl p-5" data-reveal>
+        <h3 class="font-display text-xl font-bold text-slate-900">Código visual por destino</h3>
+        <p class="mt-1.5 text-slate-700">Los pines con colores diferentes facilitan distinguir pasajeros que van a Dirección Inicial vs Dirección Final sin abrir fichas adicionales.</p>
+      </article>
+    </div>
+  </div>
+</section>
