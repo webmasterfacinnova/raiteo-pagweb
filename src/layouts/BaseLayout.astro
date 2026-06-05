@@ -18,6 +18,7 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <SEO title={title} description={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" href="/favicon.ico" /> -->
   </head>
   <body>
     <Header />
@@ -217,7 +218,7 @@ const { title, description } = Astro.props;
   }
 
   // Refrescar al redimensionar (debounce)
-  let resizeTimer: number;
+  let resizeTimer: number | NodeJS.Timeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
