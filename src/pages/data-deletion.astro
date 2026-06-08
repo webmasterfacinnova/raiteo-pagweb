@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {APP_NAME,COMPANY_NAME, CONTACT_MAILTO, CONTACT_EMAIL} from '../lib/appConfigs';
 ---
 
 <BaseLayout
@@ -15,9 +16,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="legal-body">
         <div class="highlight-box">
           <p>
-            En cumplimiento con las políticas de Google Play, Raiteo by Facinnovations 
+            {`En cumplimiento con las políticas de Google Play, ${APP_NAME} by ${COMPANY_NAME} 
             proporciona a los usuarios un mecanismo claro para solicitar la eliminación 
-            de sus datos personales.
+            de sus datos personales.`}
           </p>
         </div>
 
@@ -26,15 +27,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h3>Opción 1: Desde la aplicación</h3>
         <ol>
           <li>Abre la app Raiteo en tu dispositivo.</li>
-          <li>Ve a <strong>Configuración</strong> (ícono de engranaje).</li>
-          <li>Selecciona <strong>Privacidad</strong>.</li>
+          <li>Ve a <strong>Perfil de Usuario</strong> (foto de perfil).</li>
+          <li>Navega hasta el final.</li>
           <li>Toca <strong>Eliminar cuenta</strong>.</li>
           <li>Confirma la eliminación. Recibirás un correo de verificación.</li>
         </ol>
 
         <h3>Opción 2: Por correo electrónico</h3>
         <ol>
-          <li>Envía un correo a <a href="mailto:privacidad@raiteo.app">privacidad@raiteo.app</a>.</li>
+          <li>Envía un correo a <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.</li>
           <li>Asunto: "Solicitud de eliminación de datos".</li>
           <li>Incluye el correo electrónico asociado a tu cuenta Raiteo.</li>
           <li>Te responderemos en un plazo máximo de 48 horas para confirmar la solicitud.</li>
@@ -45,7 +46,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <li>Datos de perfil (nombre, correo, teléfono).</li>
           <li>Historial de viajes y rutas.</li>
           <li>Datos de ubicación almacenados.</li>
-          <li>Preferencias y configuraciones de la cuenta.</li>
         </ul>
 
         <h2>Plazos</h2>
@@ -61,13 +61,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           un período limitado:
         </p>
         <ul>
-          <li>Registros de transacciones (fines fiscales).</li>
           <li>Datos relacionados con investigaciones de seguridad activas.</li>
           <li>Información agregada y anonimizada (no vinculable a tu identidad).</li>
         </ul>
 
         <div class="contact-box">
-          <p><strong>¿Necesitas ayuda?</strong> Contáctanos en <a href="mailto:privacidad@raiteo.app">privacidad@raiteo.app</a></p>
+          <p><strong>¿Necesitas ayuda?</strong> Contáctanos en <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a></p>
         </div>
       </div>
     </div>
