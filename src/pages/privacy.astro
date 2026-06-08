@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {APP_NAME, COMPANY_NAME,CONTACT_EMAIL,CONTACT_MAILTO} from '../lib/appConfigs';
 ---
 
 <BaseLayout
@@ -15,13 +16,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="legal-body">
         <h2>1. Información que Recopilamos</h2>
         <p>
-          Raiteo, desarrollada por Facinnovations, recopila los siguientes tipos de información:
+          {`${APP_NAME}, desarrollada por ${COMPANY_NAME}, recopila los siguientes tipos de información:`}
         </p>
         <ul>
           <li><strong>Información de cuenta:</strong> nombre, correo electrónico, número de teléfono.</li>
           <li><strong>Datos de ubicación:</strong> ubicación en tiempo real para el funcionamiento del servicio de transporte.</li>
           <li><strong>Datos de uso:</strong> interacciones con la Aplicación, rutas seleccionadas, historial de viajes.</li>
-          <li><strong>Información del dispositivo:</strong> modelo, sistema operativo, identificadores únicos.</li>
+          
         </ul>
 
         <h2>2. Uso de la Información</h2>
@@ -65,7 +66,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>7. Contacto</h2>
         <p>
           Para ejercer sus derechos o resolver dudas sobre esta política: 
-          <a href="mailto:informacion@facinnova.com">informacion@facinnova.com</a>
+          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
         </p>
       </div>
     </div>

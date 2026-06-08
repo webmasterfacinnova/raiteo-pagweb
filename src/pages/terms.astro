@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {APP_NAME, COMPANY_NAME,CONTACT_EMAIL,CONTACT_MAILTO} from '../lib/appConfigs';
 ---
 
 <BaseLayout
@@ -15,15 +16,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="legal-body">
         <h2>1. Aceptación de los Términos</h2>
         <p>
-          Al descargar, instalar o utilizar la aplicación móvil Raiteo ("la Aplicación"), desarrollada por 
-          Facinnovations ("la Empresa"), usted acepta estar sujeto a estos Términos de Uso. 
-          Si no está de acuerdo con alguno de estos términos, no utilice la Aplicación.
+          {`Al descargar, instalar o utilizar la aplicación móvil ${APP_NAME} ("la Aplicación"), desarrollada por 
+          ${COMPANY_NAME} ("la Empresa"), usted acepta estar sujeto a estos Términos de Uso. 
+          Si no está de acuerdo con alguno de estos términos, no utilice la Aplicación.`}
         </p>
 
         <h2>2. Descripción del Servicio</h2>
         <p>
-          Raiteo es una plataforma de transporte que conecta a pasajeros con conductores mediante 
-          rutas predefinidas. La Aplicación permite a los usuarios:
+          {`${APP_NAME} es una plataforma de transporte que conecta a pasajeros con conductores mediante 
+          rutas predefinidas. La Aplicación permite a los usuarios:`}
         </p>
         <ul>
           <li>Visualizar rutas de transporte disponibles en un mapa interactivo.</li>
@@ -52,8 +53,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <h2>5. Responsabilidad</h2>
         <p>
-          Facinnovations actúa como intermediario tecnológico entre pasajeros y conductores. 
-          La Empresa no se hace responsable de:
+          {`${COMPANY_NAME} actúa como intermediario tecnológico entre pasajeros y conductores. 
+          La Empresa no se hace responsable de:`}
         </p>
         <ul>
           <li>La conducta de los usuarios durante los viajes.</li>
@@ -70,7 +71,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>7. Contacto</h2>
         <p>
           Para cualquier duda sobre estos Términos, contáctenos en: 
-          <a href="mailto:informacion@facinnova.com">informacion@facinnova.com</a>
+          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
         </p>
       </div>
     </div>
