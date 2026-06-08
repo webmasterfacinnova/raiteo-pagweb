@@ -1,0 +1,84 @@
+---
+import PhoneMock from './PhoneMock.astro';
+---
+
+<section class="app-mocks section" id="mocks">
+  <div class="container">
+    <div class="text-center" >
+      <span class="section-label">Demo visual</span>
+      <h2 class="section-title">Explora la interfaz de Raiteo</h2>
+      <p class="section-subtitle">
+        Así se ve la app en acción. Diseño intuitivo para una experiencia fluida.
+      </p>
+    </div>
+
+    <div class="mocks-grid">
+      <div class="mock-item" >
+        <PhoneMock variant="passenger-routes" label="Vista del pasajero — Explora rutas disponibles" />
+      </div>
+      <div class="mock-item" >
+        <PhoneMock variant="passenger-assigned" label="Ruta seleccionada — Conductores asignados" />
+      </div>
+      <div class="mock-item" >
+        <PhoneMock variant="driver-view" label="Vista del conductor — Pasajeros por color" />
+      </div>
+    </div>
+
+    <div class="mocks-cta text-center" >
+      <p>¿Quieres probar la experiencia completa?</p>
+      <a href="#download" class="btn btn-primary btn-large">Descargar Raiteo</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .app-mocks {
+    background: var(--color-white);
+  }
+
+  .mocks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+  }
+
+  .mock-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mocks-cta {
+    padding-top: 1rem;
+  }
+
+  .mocks-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .mocks-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .mock-item:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .mocks-grid {
+      grid-template-columns: 1fr;
+      max-width: 280px;
+    }
+
+    .mock-item:last-child {
+      grid-column: span 1;
+    }
+  }
+</style>

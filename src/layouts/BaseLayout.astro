@@ -1,0 +1,230 @@
+---
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <SEO title={title} description={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" href="/favicon.ico" /> -->
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- GSAP + ScrollTrigger -->
+   <script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAnimations() {
+    // ========== HERO ==========
+    const heroTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    heroTimeline
+      .from('.hero-text .section-label', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' })
+      .from('.hero-text h1', { y: 50, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+      .from('.hero-description', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-buttons', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+      .from('.hero-stats', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+      .from('.hero-mock', { x: 100, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6');
+
+    // Parallax del teléfono
+    gsap.to('.floating-phone', {
+      y: -30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+
+    // ========== HOW IT WORKS ==========
+    const hiwTitle = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#how-it-works',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    hiwTitle
+      .from('#how-it-works .section-label', { y: 30, opacity: 0, duration: 0.6 })
+      .from('#how-it-works .section-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.3')
+      .from('#how-it-works .section-subtitle', { y: 30, opacity: 0, duration: 0.6 }, '-=0.3');
+
+    // Animar el panel activo actual de forma segura
+    function animateActivePanel() {
+      const activePanel = document.querySelector('.tab-panel.active');
+      if (!activePanel) return;
+      
+      const steps = activePanel.querySelectorAll('.step');
+      const mock = activePanel.querySelector('.panel-mock');
+
+      // Matar animaciones previas en estos elementos para evitar que se queden trabados a la mitad
+      gsap.killTweensOf([steps, mock]);
+
+      if (steps.length) {
+        gsap.fromTo(steps, 
+          { x: -60, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: activePanel,
+              start: 'top 85%', // Un trigger más arriba para asegurar que se complete antes
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+      
+      if (mock) {
+        gsap.fromTo(mock, 
+          { x: 80, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: activePanel,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }
+
+    // Inicializar el primer panel
+    animateActivePanel();
+
+    // ========== FEATURES ==========
+        // Matamos cualquier tween previo que pueda dejar las tarjetas a medias
+        gsap.killTweensOf('.feature-card');
+
+        gsap.fromTo('.feature-card', 
+          {
+            y: 60,
+            opacity: 0
+          },
+          {
+            scrollTrigger: {
+              trigger: '#features',
+              start: 'top 85%', // Se activa un poco después de entrar para asegurar un cálculo limpio
+              toggleActions: 'play none none none',
+            },
+            y: 0,            // Forzamos el retorno a su posición original de CSS
+            opacity: 1,      // Forzamos la opacidad total al completarse
+            duration: 0.7,   // [cite: 137]
+            stagger: 0.1,    // [cite: 137]
+            ease: 'power3.out', // [cite: 137]
+            overwrite: 'auto' // Evita conflictos si se cruzan animaciones
+          }
+        );
+
+    // ========== APP MOCKS ==========
+    gsap.from('.mock-item', {
+      scrollTrigger: {
+        trigger: '#mocks',
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: 'back.out(1.4)',
+    });
+
+    // ========== CONTACT ==========
+    gsap.from('.contact-form-wrapper', {
+      scrollTrigger: {
+        trigger: '#contact',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+      x: -80,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+    });
+
+    gsap.from('.contact-info', {
+      scrollTrigger: {
+        trigger: '#contact',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+      x: 80,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+    });
+
+    // ========== FOOTER ==========
+    gsap.from('footer', {
+      scrollTrigger: {
+        trigger: 'footer',
+        start: 'top bottom',
+        toggleActions: 'play none none none',
+      },
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+    });
+
+    // Forzar el refresco de ScrollTrigger una vez que todo el DOM y estilos se asentaron
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+  }
+
+  // Esperar a que el DOM esté completamente listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimations);
+  } else {
+    initAnimations();
+  }
+
+  // Refrescar al redimensionar (debounce)
+  let resizeTimer: number | NodeJS.Timeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
+  });
+</script>
+  </body>
+</html>

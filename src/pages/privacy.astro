@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {APP_NAME, COMPANY_NAME,CONTACT_EMAIL,CONTACT_MAILTO} from '../lib/appConfigs';
+---
+
+<BaseLayout
+  title="Política de Privacidad | Raiteo"
+  description="Política de privacidad de la aplicación Raiteo by Facinnovations."
+>
+  <section class="legal-page section">
+    <div class="container legal-content">
+      <span class="section-label">Legal</span>
+      <h1>Política de Privacidad</h1>
+      <p class="legal-date">Última actualización: 1 de enero de 2026</p>
+
+      <div class="legal-body">
+        <h2>1. Información que Recopilamos</h2>
+        <p>
+          {`${APP_NAME}, desarrollada por ${COMPANY_NAME}, recopila los siguientes tipos de información:`}
+        </p>
+        <ul>
+          <li><strong>Información de cuenta:</strong> nombre, correo electrónico, número de teléfono.</li>
+          <li><strong>Datos de ubicación:</strong> ubicación en tiempo real para el funcionamiento del servicio de transporte.</li>
+          <li><strong>Datos de uso:</strong> interacciones con la Aplicación, rutas seleccionadas, historial de viajes.</li>
+          
+        </ul>
+
+        <h2>2. Uso de la Información</h2>
+        <p>Utilizamos la información recopilada para:</p>
+        <ul>
+          <li>Proveer y mejorar el servicio de transporte.</li>
+          <li>Conectar pasajeros con conductores en rutas específicas.</li>
+          <li>Enviar notificaciones relacionadas con el servicio.</li>
+          <li>Garantizar la seguridad de los usuarios.</li>
+          <li>Cumplir con obligaciones legales.</li>
+        </ul>
+
+        <h2>3. Compartición de Datos</h2>
+        <p>
+          Compartimos información limitada entre pasajeros y conductores para facilitar el servicio 
+          (ubicación aproximada, punto de recogida). No vendemos datos personales a terceros.
+        </p>
+
+        <h2>4. Retención y Eliminación</h2>
+        <p>
+          Conservamos sus datos mientras su cuenta esté activa. Puede solicitar la eliminación 
+          de sus datos en cualquier momento. Consulte nuestra página de 
+          <a href="/data-deletion">Eliminación de Datos</a> para más información.
+        </p>
+
+        <h2>5. Seguridad</h2>
+        <p>
+          Implementamos medidas técnicas y organizativas para proteger sus datos contra accesos 
+          no autorizados, pérdida o alteración.
+        </p>
+
+        <h2>6. Derechos del Usuario</h2>
+        <p>Usted tiene derecho a:</p>
+        <ul>
+          <li>Acceder a sus datos personales.</li>
+          <li>Rectificar datos inexactos.</li>
+          <li>Solicitar la eliminación de sus datos.</li>
+          <li>Oponerse al tratamiento de sus datos.</li>
+        </ul>
+
+        <h2>7. Contacto</h2>
+        <p>
+          Para ejercer sus derechos o resolver dudas sobre esta política: 
+          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: calc(var(--header-height) + 3rem);
+    min-height: 80vh;
+  }
+
+  .legal-content {
+    max-width: 800px;
+  }
+
+  .legal-content h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-date {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-body h2 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-primary-dark);
+  }
+
+  .legal-body p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .legal-body ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-body li {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+</style>

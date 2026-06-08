@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {APP_NAME,COMPANY_NAME, CONTACT_MAILTO, CONTACT_EMAIL} from '../lib/appConfigs';
+---
+
+<BaseLayout
+  title="Eliminación de Datos | Raiteo"
+  description="Información sobre cómo solicitar la eliminación de datos personales en Raiteo by Facinnovations."
+>
+  <section class="legal-page section">
+    <div class="container legal-content">
+      <span class="section-label">Privacidad</span>
+      <h1>Eliminación de Datos</h1>
+      <p class="legal-date">Cumplimiento de Google Play - Actualizado: 1 de enero de 2026</p>
+
+      <div class="legal-body">
+        <div class="highlight-box">
+          <p>
+            {`En cumplimiento con las políticas de Google Play, ${APP_NAME} by ${COMPANY_NAME} 
+            proporciona a los usuarios un mecanismo claro para solicitar la eliminación 
+            de sus datos personales.`}
+          </p>
+        </div>
+
+        <h2>¿Cómo solicitar la eliminación de tus datos?</h2>
+
+        <h3>Opción 1: Desde la aplicación</h3>
+        <ol>
+          <li>Abre la app Raiteo en tu dispositivo.</li>
+          <li>Ve a <strong>Perfil de Usuario</strong> (foto de perfil).</li>
+          <li>Navega hasta el final.</li>
+          <li>Toca <strong>Eliminar cuenta</strong>.</li>
+          <li>Confirma la eliminación. Recibirás un correo de verificación.</li>
+        </ol>
+
+        <h3>Opción 2: Por correo electrónico</h3>
+        <ol>
+          <li>Envía un correo a <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.</li>
+          <li>Asunto: "Solicitud de eliminación de datos".</li>
+          <li>Incluye el correo electrónico asociado a tu cuenta Raiteo.</li>
+          <li>Te responderemos en un plazo máximo de 48 horas para confirmar la solicitud.</li>
+        </ol>
+
+        <h2>¿Qué datos se eliminan?</h2>
+        <ul>
+          <li>Datos de perfil (nombre, correo, teléfono).</li>
+          <li>Historial de viajes y rutas.</li>
+          <li>Datos de ubicación almacenados.</li>
+        </ul>
+
+        <h2>Plazos</h2>
+        <p>
+          La eliminación completa de los datos puede tardar hasta <strong>7 días hábiles</strong> 
+          desde la confirmación de la solicitud. Algunos datos pueden conservarse por obligaciones 
+          legales (facturación, reclamaciones) durante el período requerido por la ley aplicable.
+        </p>
+
+        <h2>Datos que no se eliminan inmediatamente</h2>
+        <p>
+          Por requisitos legales y de seguridad, podemos retener cierta información durante 
+          un período limitado:
+        </p>
+        <ul>
+          <li>Datos relacionados con investigaciones de seguridad activas.</li>
+          <li>Información agregada y anonimizada (no vinculable a tu identidad).</li>
+        </ul>
+
+        <div class="contact-box">
+          <p><strong>¿Necesitas ayuda?</strong> Contáctanos en <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: calc(var(--header-height) + 3rem);
+    min-height: 80vh;
+  }
+
+  .legal-content {
+    max-width: 800px;
+  }
+
+  .legal-content h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-date {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-body h2 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-primary-dark);
+  }
+
+  .legal-body h3 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .legal-body p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .legal-body ul,
+  .legal-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-body li {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  .highlight-box {
+    background: var(--color-primary-bg);
+    border-left: 4px solid var(--color-primary);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 2rem;
+  }
+
+  .highlight-box p {
+    margin-bottom: 0;
+    color: var(--color-text);
+  }
+
+  .contact-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--color-off-white);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid var(--color-light-gray);
+  }
+
+  .contact-box p {
+    margin-bottom: 0;
+    color: var(--color-text);
+  }
+</style>

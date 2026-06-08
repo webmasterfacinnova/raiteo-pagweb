@@ -1,0 +1,181 @@
+---
+// Footer
+import {APP_NAME, COMPANY_NAME, linbkedInUrl, CONTACT_MAILTO} from '../lib/appConfigs';
+import { Mail, Phone } from '@lucide/astro'
+
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+        <img src="/Raiteo_logo_.png" alt="Raiteo Logo" width="32" height="32" class="footer-logo-icon">
+          <span>{APP_NAME}</span>
+        </a>
+        <p class="footer-description">
+          Transporte inteligente que conecta pasajeros y conductores mediante rutas optimizadas.
+          Desarrollado por <strong>{COMPANY_NAME}</strong>.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#how-it-works">Cómo funciona</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#mocks">Demo</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#download">Descargar</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/terms">Términos de Uso</a></li>
+          <li><a href="/privacy">Política de Privacidad</a></li>
+          <li><a href="/data-deletion">Eliminación de Datos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>Síguenos</h4>
+        <div class="social-icons">
+          <a href="tel:+523344849378" aria-label="Facebook" class="social-icon">
+            <Phone size="18" width="18" />
+          </a> 
+          <a href={CONTACT_MAILTO} aria-label="Twitter" class="social-icon">
+            <Mail size="18" width="18"  />
+          </a>
+          <a href={linbkedInUrl} aria-label="Instagram" class="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} Facinnovations. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4rem 0 1.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 300px;
+  }
+
+  .footer-description strong {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .footer-links h4,
+  .footer-social h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.9rem;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: #fff;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .social-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all var(--transition-fast);
+  }
+
+  .social-icon:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-logo-icon {
+   filter: drop-shadow(#ffffff 0px 0px 2px)
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+      grid-column: span 1;
+    }
+  }
+</style>

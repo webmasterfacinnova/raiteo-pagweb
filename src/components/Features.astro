@@ -1,0 +1,130 @@
+---
+// Características principales
+import { Smartphone , MapPin , Palette, Map , Flag} from '@lucide/astro'
+---
+
+<section class="features section" id="features">
+  <div class="container">
+    <div class="text-center" >
+      <span class="section-label">Características</span>
+      <h2 class="section-title">Todo lo que necesitas para moverte</h2>
+      <p class="section-subtitle">
+        Diseñada para ofrecer la mejor experiencia de transporte compartido.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <Map width="28" height="28" />
+        </div>
+        <h3>Mapa interactivo</h3>
+        <p>Visualiza todas las rutas disponibles con polilíneas interactivas. Acércate, explora y elige la que mejor se adapte a tu destino.</p>
+      </article>
+
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <Flag width="28" height="28" />
+        </div>
+        <h3>Puntos flexibles</h3>
+        <p>Elige subir al transporte en el punto inicial o final de la ruta. Tú decides qué te conviene más según tu ubicación.</p>
+      </article>
+
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <Palette width="28" height="28" />
+        </div>
+        <h3>Código de colores</h3>
+        <p>Los pasajeros se identifican por color según su destino, facilitando la organización visual tanto para conductores como para otros pasajeros.</p>
+      </article>
+
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Tiempo real</h3>
+        <p>Seguimiento en vivo de tu conductor asignado. Sabrás exactamente cuándo llegará a recogerte para que no tengas que esperar.</p>
+      </article>
+
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <MapPin width="28" height="28" />
+        </div>
+        <h3>Rutas optimizadas</h3>
+        <p>Algoritmos inteligentes que optimizan las rutas para minimizar tiempos de espera y maximizar la eficiencia de cada viaje.</p>
+      </article>
+
+      <article class="feature-card" >
+        <div class="feature-icon">
+          <Smartphone width="28" height="28" />
+        </div>
+        <h3>Doble perfil</h3>
+        <p>La misma app funciona para pasajeros y conductores. Cambia de rol según lo necesites con una interfaz adaptada a cada perfil.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    background: var(--color-off-white);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-light-gray);
+    transition: all var(--transition-base);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--color-primary-bg);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 900px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+  }
+</style>
