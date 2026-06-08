@@ -1,12 +1,14 @@
 ---
 // Header con navegación sticky
+import { siGoogleplay } from 'simple-icons';
+import { playStoreUrl } from '../lib/appConfigs';
 ---
 
 <header class="header" id="header">
   <div class="container header-inner">
     <a href="/" class="logo" aria-label="Raiteo - Inicio">
       <span class="logo-icon">
-        <img src="/public/Raiteo_logo_.png" alt="Raiteo Logo" width="32" height="32">
+        <img src="/Raiteo_logo_.png" alt="Raiteo Logo" width="32" height="32">
       </span>
       <span class="logo-text">Raiteo</span>
     </a>
@@ -21,7 +23,12 @@
     </nav>
 
     <div class="header-actions">
-      <a href="#download" class="btn btn-primary btn-sm">Descargar App</a>
+      <a href={playStoreUrl} class="btn btn-primary btn-sm">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
+							<path d={siGoogleplay.path} />
+						</svg>
+        Descargar App
+      </a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Menú">
         <span></span>
         <span></span>

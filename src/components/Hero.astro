@@ -1,5 +1,7 @@
 ---
 // Hero section
+import { playStoreUrl } from '../lib/appConfigs';
+import { siGoogleplay } from 'simple-icons'
 ---
 
 <section class="hero" id="hero">
@@ -13,8 +15,10 @@
         mediante rutas inteligentes. Viaja de forma eficiente, económica y segura.
       </p>
       <div class="hero-buttons" >
-        <a href="#download" class="btn btn-primary btn-large">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5H7z"/><path d="M12 3v12H5l7 7 7-7h-7V3z"/></svg>
+        <a href={playStoreUrl} target="_blank" rel="noreferrer" class="btn btn-primary btn-large">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">
+							<path d={siGoogleplay.path} />
+						</svg>
           Descargar App
         </a>
         <a href="#how-it-works" class="btn btn-outline btn-large">
