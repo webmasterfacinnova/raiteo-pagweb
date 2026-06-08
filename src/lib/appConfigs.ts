@@ -8,6 +8,8 @@ export const BUSSINESS_HOURS = "Lunes a Viernes, 8:00 – 17:00";
 export const playStoreUrl =
   "https://play.google.com/store/apps/details?id=com.facinnova.raiteo";
 
+export const linbkedInUrl = "https://www.linkedin.com/company/facinnova/";
+
 const DELETE_DATA_SUBJECT = `Solicitud de eliminacion de datos - ${APP_NAME}`;
 const DELETE_DATA_BODY = [
   `Hola equipo de ${APP_NAME},`,
