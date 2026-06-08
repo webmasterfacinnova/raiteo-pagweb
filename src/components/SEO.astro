@@ -6,11 +6,13 @@ export interface Props {
   canonicalURL?: string;
 }
 
+import { APP_NAME, COMPANY_NAME, CONTACT_EMAIL, CONTACT_MAILTO } from '../lib/appConfigs';
+
 const {
-  title = "Raiteo - Transporte inteligente | Facinnovations",
+  title = `${APP_NAME} - Transporte inteligente | ${COMPANY_NAME}`,
   description = "Raiteo es la app de transporte que conecta pasajeros y conductores con rutas inteligentes. Descarga gratis y viaja de forma eficiente.",
   image = "/og-image.png",
-  canonicalURL = "https://raiteo.app",
+  canonicalURL = "https://raiteo.com",
 } = Astro.props;
 ---
 
@@ -25,7 +27,7 @@ const {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={image} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:site_name" content="Raiteo" />
+<meta property="og:site_name" content={APP_NAME} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
