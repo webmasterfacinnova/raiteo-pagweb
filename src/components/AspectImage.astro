@@ -1,0 +1,88 @@
+---
+// Componente de imagen que preserva la relación de aspecto
+// Props:
+// - src: string (ruta de la imagen, obligatorio)
+// - alt: string (texto alternativo, por defecto "")
+// - aspectRatio: number (opcional, ej: 16/9, 4/3. Si se omite, la imagen usa su proporción natural)
+// - objectFit: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down' (por defecto "cover")
+// - containerClass: string (clases CSS adicionales para el contenedor)
+// - imgClass: string (clases CSS adicionales para la imagen)
+
+export interface Props {
+  src: string;
+  alt?: string;
+  aspectRatio?: number;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  containerClass?: string;
+  imgClass?: string;
+  floating?: boolean; // Si true, aplica animación de flotación (para mockups de teléfonos)
+}
+
+const {
+  src,
+  alt = '',
+  aspectRatio,
+  objectFit = 'cover',
+  containerClass = '',
+  imgClass = '',
+  floating = false,
+} = Astro.props;
+
+// Estilo inline para el contenedor si se define aspectRatio
+const containerStyle = aspectRatio ? `aspect-ratio: ${aspectRatio};` : '';
+---
+
+{
+  aspectRatio ? (
+    <div class={`aspect-image-container ${containerClass} ${floating && 'floating-phone'} `} style={containerStyle}>
+      <img src={src} alt={alt} class={`aspect-image-img ${imgClass}`} style={`object-fit: ${objectFit};`} loading="lazy" />
+    </div>
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      class={`aspect-image-natural ${imgClass} ${floating && 'floating-phone'}`}
+      style={`object-fit: ${objectFit}; width: 100%; height: auto;`}
+      loading="lazy"
+    />
+  )
+}
+
+<style is:global>
+  /* Contenedor con relación fija (si se usa aspectRatio) */
+  .aspect-image-container {
+    position: relative;
+    width: 100%;
+  }
+  .aspect-image-container .aspect-image-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  /* Imagen sin contenedor fijo (usa su relación natural) */
+  .aspect-image-natural {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .floating-phone {
+    animation: float 6s ease-in-out infinite;
+    transform-origin: center center; /* evita desplazamiento lateral */
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  @media (max-width: 768px) {
+    .aspect-image-natural {
+      
+      max-width: 250px;
+    }
+  }
+</style>
