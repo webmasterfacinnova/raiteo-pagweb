@@ -20,13 +20,20 @@ import { playStoreUrl } from '../lib/appConfigs';
         <li><a href="/#mocks">Demo</a></li>
         <li><a href="/#contact">Contacto</a></li>
       </ul>
+      <!-- Botón de descarga visible solo en móvil dentro del menú desplegable -->
+      <a href={playStoreUrl} class="btn btn-primary mobile-download-btn">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
+          <path d={siGoogleplay.path} />
+        </svg>
+        Descargar App
+      </a>
     </nav>
 
     <div class="header-actions">
       <a href={playStoreUrl} class="btn btn-primary btn-sm">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
-							<path d={siGoogleplay.path} />
-						</svg>
+          <path d={siGoogleplay.path} />
+        </svg>
         Descargar App
       </a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Menú">
@@ -82,8 +89,6 @@ import { playStoreUrl } from '../lib/appConfigs';
     align-items: center;
     filter: drop-shadow(#000000 0px 0px 2px)
   }
-
-  
 
   .logo-text {
     background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
@@ -165,43 +170,75 @@ import { playStoreUrl } from '../lib/appConfigs';
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
+  /* Botón de descarga exclusivo para móvil (dentro del menú desplegable) */
+  .mobile-download-btn {
+    display: none;
+  }
+
   @media (max-width: 768px) {
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--color-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition-base);
-    }
-
-    .nav.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .nav-list {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-list a {
-      font-size: 1.3rem;
-    }
-
     .mobile-toggle {
       display: flex;
     }
 
     .header-actions .btn {
       display: none;
+    }
+
+    /* Menú desplegable hacia abajo */
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      border-radius: 0 0 1rem 1rem;
+      padding: 1.25rem 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-0.5rem);
+      transition: all var(--transition-base);
+      z-index: 999;
+    }
+
+    .nav.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+
+    .nav-list li {
+      width: 100%;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .nav-list li:last-child {
+      border-bottom: none;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 0.875rem 0;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    .nav-list a::after {
+      display: none;
+    }
+
+    /* Botón de descarga dentro del menú desplegable */
+    .mobile-download-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.25rem;
+      width: 100%;
     }
   }
 </style>
@@ -219,25 +256,54 @@ import { playStoreUrl } from '../lib/appConfigs';
     }
   });
 
-  // Mobile toggle
+  // Elementos del menú móvil
   const mobileToggle = document.getElementById('mobileToggle');
   const nav = document.getElementById('nav');
 
-  mobileToggle?.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    
-    if (nav===null) return;
+  function closeMenu() {
+    mobileToggle?.classList.remove('active');
+    nav?.classList.remove('active');
+  }
 
-    nav.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+  function openMenu() {
+    mobileToggle?.classList.add('active');
+    nav?.classList.add('active');
+  }
+
+  // Alternar menú al hacer clic en el botón hamburguesa
+  mobileToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (nav?.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  // Cerrar menú al hacer clic en un enlace
-  document.querySelectorAll('.nav-list a').forEach(link => {
+  // Cerrar menú al hacer clic en cualquier enlace del nav (incluyendo botón de descarga móvil)
+  document.querySelectorAll('.nav a').forEach(link => {
     link.addEventListener('click', () => {
-      mobileToggle?.classList.remove('active');
-      nav?.classList.remove('active');
-      document.body.style.overflow = '';
+      closeMenu();
     });
+  });
+
+  // Cerrar menú si se hace clic fuera de él (solo cuando está abierto)
+document.addEventListener('click', (e) => {
+  if (nav && nav.classList.contains('active')) {
+    // Validamos estrictamente que e.target sea un nodo real del DOM
+    if (e.target instanceof Node) {
+      const isClickInside = nav.contains(e.target) || mobileToggle?.contains(e.target);
+      if (!isClickInside) {
+        closeMenu();
+      }
+    }
+  }
+});
+
+  // Al redimensionar a escritorio, cerrar el menú si estuviera abierto
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && nav?.classList.contains('active')) {
+      closeMenu();
+    }
   });
 </script>
